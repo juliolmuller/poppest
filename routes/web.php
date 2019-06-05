@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/new', 'RepositoryController@create');
+Route::get('/del', 'RepositoryController@index');
