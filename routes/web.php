@@ -1,18 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+/**
+ * Route to the home page of the application.
+ */
 Route::get('/', function () {
-    return view('welcome');
+    return view('index', [
+        'languges' => Language::all()
+    ]);
 });
-Route::get('/new', 'RepositoryController@create');
-Route::get('/del', 'RepositoryController@index');
+
+/**
+ * Route to capture data from GitHub API.
+ */
+Route::post('/load/{?language}', 'RepositoryController@load');

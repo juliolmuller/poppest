@@ -5,81 +5,53 @@ namespace App\Http\Controllers;
 use DB;
 use App\Repository;
 use Illuminate\Http\Request;
+use Ixudra\Curl\Facades\Curl;
 
 class RepositoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fix constant for GitHub API URL.
      */
-    public function index()
+    private const GITHUB_API = 'https://api.github.com/search/repositories';
+
+    /**
+     * Return an array with the required parameters for the request.
+     */
+    private static function getParams(string $language)
     {
+        return [
+            'q' => 'language:' . $language,
+            'sort' => 'stars',
+            'order' => 'desc'
+        ];
+    }
+
+    /**
+     * Delete (softly) all records in 'repositories' table.
+     */
+    private static function reset(string $language = '')
+    {
+        Repository::where('language', 'like', "%{$$language}%")->delete();
+    }
+
+    /**
+     * Capture data from external API and save into database.
+     */
+    public function load(string $language = null)
+    {
+        $response = Curl::to(self::GITHUB_API)
+            ->withHeader('User-Agent: juliolmuller')
+            ->withData(self::getParams($language))
+            ->get();
         $this->reset();
         return '<h1>Records deleted!</h1>';
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $r = new Repository();
-        $r->save();
-        return '<h1>Record added!</h1>';
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
-     *
-     * @param  \App\Repository  $repository
-     * @return \Illuminate\Http\Response
      */
-    public function show(Repository $repository)
+    public function show(string $language = null)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Repository  $repository
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Repository $repository)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Repository  $repository
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Repository $repository)
-    {
-        //
-    }
-
-    /**
-     * Deletes all records in the database
-     */
-    private function reset()
-    {
-        //DB::table('repositories')->delete();
-        Repository::where('id', 'like', '%%')->delete();
     }
 }
