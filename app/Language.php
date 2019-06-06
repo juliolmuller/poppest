@@ -26,7 +26,7 @@ class Language extends Model
     /**
      * Stablish parental relationship to the table 'repositories'.
      */
-    public function language()
+    public function repositories()
     {
         return $this->hasMany('App\Repository');
     }
