@@ -8,12 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Language extends Model
 {
     /**
-     * Apply resource to the model.
-     */
-    use SoftDeletes;
-
-    /**
-     * Explicitly declare associated table name.
+     * Explicitly declare associated table name (not required).
      */
     protected $table = 'repositories';
 
@@ -27,4 +22,12 @@ class Language extends Model
         'python',
         'c#'
     ];
+
+    /**
+     * Stablish parental relationship to the table 'repositories'.
+     */
+    public function language()
+    {
+        return $this->hasMany('App\Repository');
+    }
 }

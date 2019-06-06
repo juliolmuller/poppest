@@ -4,16 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepositoriesTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('repositories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->softDeletes();
+        Schema::create('languages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 32);
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ class CreateRepositoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repositories');
+        Schema::dropIfExists('languages');
     }
 }

@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Repository extends Model
 {
     /**
-     * Apply resource to the model.
-     */
-    use SoftDeletes;
-
-    /**
-     * Explicitly declare associated table name.
+     * Explicitly declare associated table name (not required).
      */
     protected $table = 'repositories';
+
+    /**
+     * Stablish relationship to the table 'languages'.
+     */
+    public function language()
+    {
+        return $this->belongsTo('App\Language');
+    }
 }
