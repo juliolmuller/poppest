@@ -3,15 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Language extends Model
 {
+    /**
+     * Apply resource to the model.
+     */
     use SoftDeletes;
 
     /**
-     * Limit searchable programing languages to these 5:
+     * Explicitly declare associated table name.
      */
-    public const LANGUAGES = [
+    protected $table = 'repositories';
+
+    /**
+     * Define 5 default programming languages as model.
+     */
+    public const CHOSEN = [
         'php',
         'javascript',
         'java',

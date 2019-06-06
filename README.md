@@ -1,1 +1,4 @@
-"Poppest - The Most Popular Repositories in GitHub" 
+
+# Poppest - The Most Popular Repositories in GitHub
+
+[GitHub Search API](https://developer.github.com/v3/search/)
