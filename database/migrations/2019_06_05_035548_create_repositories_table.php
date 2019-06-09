@@ -20,8 +20,8 @@ class CreateRepositoriesTable extends Migration
             $table->string('url');
             $table->integer('stars')->unsigned();
             $table->integer('forks')->unsigned();
-            $table->integer('language_id');
-            $table->string('description')->nullable();
+            $table->integer('language_id')->unsigned();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('language_id')->references('id')->on('languages');
         });

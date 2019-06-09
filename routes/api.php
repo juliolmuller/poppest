@@ -1,6 +1,11 @@
 <?php
 
 /**
- * Routes to capture the data stored in database.
+ * Routes to capture data stored in database.
  */
-Route::get('/{?language}', 'RepositoryController@show');
+Route::get('/show/{languageId?}', 'RepositoryController@show');
+
+/**
+ * Toute to update database content (connects with external API)
+ */
+Route::get('/load/{languageId?}', 'RepositoryController@load');

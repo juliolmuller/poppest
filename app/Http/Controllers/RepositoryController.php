@@ -2,56 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\Repository;
 use Illuminate\Http\Request;
-use Ixudra\Curl\Facades\Curl;
+use App\Language;
+use App\Repository;
 
 class RepositoryController extends Controller
 {
     /**
-     * Fix constant for GitHub API URL.
+     * Display 'Home' view
      */
-    private const GITHUB_API = 'https://api.github.com/search/repositories';
-
-    /**
-     * Return an array with the required parameters for the request.
-     */
-    private static function getParams(string $language)
+    public function index()
     {
-        return [
-            'q' => 'language:' . $language,
-            'sort' => 'stars',
-            'order' => 'desc'
-        ];
+        $repoByLang = Language::with(['repositories'])->get();
+        return view('home', compact($repoByLang));
     }
 
     /**
-     * Delete (softly) all records in 'repositories' table.
+     * List the content stored in the database
      */
-    private static function reset(string $language = '')
+    public function show(int $languageId = 0)
     {
-        Repository::where('language', 'like', "%{$$language}%")->delete();
+        if (empty($languageId))
+            return Language::with(['language'])->get();
+        return Language::findOrFail($languageId)->get();
     }
 
     /**
-     * Capture data from external API and save into database.
+     * Capture fresh data from the GitHub API
      */
-    public function load(string $language = null)
+    public function load(int $languageId = 0)
     {
-        $response = Curl::to(self::GITHUB_API)
-            ->withHeader('User-Agent: juliolmuller')
-            ->withData(self::getParams($language))
-            ->get();
-        $this->reset();
-        return '<h1>Records deleted!</h1>';
-    }
+        // If no ID was provided, reset all
+        if (empty($languageId)) {
+            Repository::reset(Language::all());
+            return $this->show();
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $language = null)
-    {
-        //
+        // If there is an ID reset requested languages
+        Repository::reset(Language::find($languageId));
+        return $this->show($languageId);
     }
 }
