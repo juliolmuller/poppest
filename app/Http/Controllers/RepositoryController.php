@@ -14,7 +14,7 @@ class RepositoryController extends Controller
     public function index()
     {
         $repoByLang = Language::with(['repositories'])->get();
-        return view('home', compact($repoByLang));
+        return view('home', compact('repoByLang'));
     }
 
     /**

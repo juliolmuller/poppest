@@ -22,7 +22,7 @@ class Repository extends Model
             ->withHeader('User-Agent: juliolmuller')
             ->withContentType('application/json')
             ->withData([
-                'q' => 'language:' . $language,
+                'q' => 'language:' . mb_strtolower($language),
                 'sort' => 'stars',
                 'order' => 'desc'
             ])->get();
