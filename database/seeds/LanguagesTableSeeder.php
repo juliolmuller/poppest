@@ -10,11 +10,11 @@ class LanguagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('languages')->insert([
-            ['name' => 'php'],
-            ['name' => 'java'],
-            ['name' => 'javascript'],
-            ['name' => 'python'],
-            ['name' => 'c#']
+            ['name' => 'PHP'],
+            ['name' => 'Java'],
+            ['name' => 'JavaScript'],
+            ['name' => 'Python'],
+            ['name' => 'C#']
         ]);
     }
 }
