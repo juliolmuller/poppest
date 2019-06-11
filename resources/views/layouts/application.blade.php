@@ -9,19 +9,21 @@
     <title>
       Poppest :: The Most Popular Repositories in GitHub
     </title>
-    <link rel="stylesheet" href="{{ asset('./css/app.css') }}" />
-    @hasSection ('styles')
-      @yield('styles')
-    @endif
+    @section('styles')
+      <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+      <link rel="stylesheet" href="{{ asset('css/libs.css') }}" />
+      <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+    @show
   </head>
   <body>
+
     @hasSection ('body')
       @yield('body')
     @endif
 
-    <script src="{{ asset('./js/app.js') }}"></script>
-    @hasSection ('scripts')
-      @yield('scripts')
-    @endif
+    @section('scripts')
+      <script src="{{ asset('js/libs.js') }}"></script>
+      <script src="{{ asset('js/scripts.js') }}"></script>
+    @show
   </body>
 </html>

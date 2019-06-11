@@ -36894,26 +36894,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-/***/ }),
-
-/***/ "./resources/js/bootstrap.js":
-/*!***********************************!*\
-  !*** ./resources/js/bootstrap.js ***!
-  \***********************************/
+/***/ "./resources/scripts/bootstrap.js":
+/*!****************************************!*\
+  !*** ./resources/scripts/bootstrap.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36968,10 +36952,21 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
+/***/ "./resources/scripts/libs.js":
+/*!***********************************!*\
+  !*** ./resources/scripts/libs.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./bootstrap */ "./resources/scripts/bootstrap.js");
+
+/***/ }),
+
+/***/ "./resources/styles/libs.scss":
+/*!************************************!*\
+  !*** ./resources/styles/libs.scss ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -36980,14 +36975,14 @@ if (token) {
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!**********************************************************************!*\
+  !*** multi ./resources/scripts/libs.js ./resources/styles/libs.scss ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\julio\OneDrive\Documentos\Estudos\Udemy\Laravel Completo\Cadastro de Categorias\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\julio\OneDrive\Documentos\Estudos\Udemy\Laravel Completo\Cadastro de Categorias\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\julio\Downloads\App Poppest\resources\scripts\libs.js */"./resources/scripts/libs.js");
+module.exports = __webpack_require__(/*! C:\Users\julio\Downloads\App Poppest\resources\styles\libs.scss */"./resources/styles/libs.scss");
 
 
 /***/ })
