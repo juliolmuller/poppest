@@ -21,22 +21,16 @@
       </div>
       <nav id="navbar" class="nav nav-pills nav-fill">
         @foreach ($languages as $language)
-          <a href="#" onclick="activate(@json($language->id))" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
+          <a href="#" id="language-tab-{{ $language->id }}" onload="refresh({{ $language->id }})" onclick="activate({{ $language->id }})" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
         @endforeach
       </nav>
       <div id="panel-0" class="content text-center">
         <img src="{{ asset('img/loading.gif') }}" alt="Loading animation">
       </div>
-      @foreach ($languages as $language)
-        @component('components.repositories', [
-          'id' => $language->id,
-          'repositories' => $language->repositories,
-          'display' => 'none'
-        ])
-        @endcomponent
-      @endforeach
+
       @component('components.modal')
       @endcomponent
+
     </div>
   </main>
 
@@ -46,5 +40,9 @@
   @parent
   <script type="text/javascript">
     $.ajaxSetup({ headers: { 'X-CSRF-Token': '{{ csrf_token() }}'} })
+    const LANGUAGES = []
+    @foreach ($languages as $language)
+      LANGUAGES[{{ $loop->index }}] = '{{ $language->id }}'
+    @endforeach
   </script>
 @endsection

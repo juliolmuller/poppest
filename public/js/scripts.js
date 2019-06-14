@@ -1,4 +1,25 @@
 
+// AJAX request to capture the repositories info from database
+function refresh(tabId) {
+  $(`language-tab-${tabId}`)
+}
+
+// Activate language tab
+function activate(tabId) {
+  $('[id^="language-tab-"]').removeClass('active')
+  $('[id^="language-panel-"]').hide()
+  $(`#language-tab-${tabId}`).addClass('active')
+  $(`#language-panel-${tabId}`).show()
+  console.log('OK')
+}
+
+// Refresh entire database
+function refreshAll() {}
+
+// Display repository details in modal
+function display(repository) {}
+
+/*
 // Monta a linha em HTML de um registro de produto
 function montarLinha(produto) {
   return `
@@ -113,3 +134,4 @@ $(function() {
   carregarProdutos()
   carregarCategorias()
 })
+*/

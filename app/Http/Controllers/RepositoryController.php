@@ -18,13 +18,18 @@ class RepositoryController extends Controller
     }
 
     /**
-     * List the content stored in the database
+     * Returns the view for Repositories List
      */
-    public function show(int $languageId = 0)
+    public function show($languageId, Request $request)
     {
-        if (empty($languageId))
-            return Language::with(['language'])->get();
-        return Language::findOrFail($languageId)->get();
+        $repositories = Repository::where('language_id', $languageId)->get();
+        if (!count($repositories))
+            return response(['errors' => "No records found for language '{$languageId}'"], 422);
+        return view('components.repositories', [
+            'id' => $languageId,
+            'repositories' => $repositories,
+            'display' => $request->display ?? ''
+        ]);
     }
 
     /**
