@@ -98,3 +98,14 @@ section.success{
   background-color: #18bc9c;
   color: #fff;
 }
+
+.inline {
+  display: inline;
+  margin-left: 20px;
+}
+
+.repo-avatar {
+  float: left;
+  max-height: 50px;
+  margin-right: 20px;
+}

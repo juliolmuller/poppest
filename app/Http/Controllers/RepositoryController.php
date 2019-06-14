@@ -13,7 +13,7 @@ class RepositoryController extends Controller
      */
     public function index()
     {
-        $languages = Language::all();
+        $languages = Language::with(['repositories'])->get();
         return view('home', compact('languages'));
     }
 

@@ -19,13 +19,21 @@
           </button>
         </div>
       </div>
-      <nav class="nav nav-pills nav-fill">
+      <nav id="navbar" class="nav nav-pills nav-fill">
         @foreach ($languages as $language)
-          <a onclick="activate(@json($language))" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
+          <a href="#" onclick="activate(@json($language->id))" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
         @endforeach
       </nav>
+      <div id="panel-0" class="content text-center">
+        <img src="{{ asset('img/loading.gif') }}" alt="Loading animation">
+      </div>
       @foreach ($languages as $language)
-        <div id="panel-{{ $language->id }}"></div>
+        @component('components.repositories', [
+          'id' => $language->id,
+          'repositories' => $language->repositories,
+          'display' => 'none'
+        ])
+        @endcomponent
       @endforeach
       @component('components.modal')
       @endcomponent
