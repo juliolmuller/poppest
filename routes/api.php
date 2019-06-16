@@ -1,11 +1,16 @@
 <?php
 
 /**
- * Routes to capture data stored in database.
+ * Request full-update to the database (capture recent info from GitHub API)
+ */
+Route::post('/load/{languageId?}', 'RepositoryController@load');
+
+/**
+ * Capture all records for the parameter 'languageId'
  */
 Route::post('/show/{languageId}', 'RepositoryController@show');
 
 /**
- * Toute to update database content (connects with external API)
+ * Capture data for a single repository record
  */
-Route::post('/load/{languageId?}', 'RepositoryController@load');
+Route::get('/repository/{repositoryId}', 'RepositoryController@display');

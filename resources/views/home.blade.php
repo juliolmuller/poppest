@@ -14,25 +14,36 @@
           </h2>
         </div>
         <div class="col-xs-12 col-sm-2">
-          <button type="submit" class="btn btn-lg btn-outline-success btn-block" onclickk="refreshAll()">
+          <button id="refresh-btn" type="button" class="btn btn-lg btn-outline-success btn-block" onclick="refresh()">
             Refresh
           </button>
         </div>
       </div>
+      <div class="row">
+        <div class="progress col-sm-12">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0" aria-valuemax="100"></div>
+        </div>
+      </div>
       <nav id="navbar" class="nav nav-pills nav-fill">
         @foreach ($languages as $language)
-          <a href="#" id="language-tab-{{ $language->id }}" onload="refresh({{ $language->id }})" onclick="activate({{ $language->id }})" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
+          <a href="#" id="panel-tab-{{ $language->id }}" onclick="activate({{ $language->id }})" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
         @endforeach
       </nav>
-      <div id="panel-0" class="content text-center">
-        <img src="{{ asset('img/loading.gif') }}" alt="Loading animation">
+      <div id="panel-main">
+        @foreach ($languages as $language)
+          <div id="panel-board-{{ $language->id }}" style="display: none;">
+            <div id="panel-loading-{{ $language->id }}" class="content text-center">
+              <img src="{{ asset('img/loading.gif') }}" alt="Loading animation">
+            </div>
+            <div id="panel-content-{{ $language->id }}" style="display: none;"></div>
+          </div>
+        @endforeach
       </div>
-
-      @component('components.modal')
-      @endcomponent
-
     </div>
   </main>
+
+  @component('components.modal')
+  @endcomponent
 
 @endsection
 

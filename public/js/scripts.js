@@ -1,137 +1,71 @@
 
-// AJAX request to capture the repositories info from database
-function refresh(tabId) {
-  $(`language-tab-${tabId}`)
+// Submit AJAX request to capture content for ID 'id'
+function request(id) {
+  const loading = $(`#panel-loading-${id}`).show()
+  const content = $(`#panel-content-${id}`).hide()
+  $.ajax({
+    method: 'POST',
+    url: `/api/show/${id}`,
+    context: this,
+    dataType: 'html',
+    error: resp => console.log(resp),
+    success: resp => {
+      $(`#panel-content-${id}`).html(resp)
+      loading.hide()
+      content.show()
+    }
+  })
+}
+
+// Require database update
+function refresh() {
+  $('#refresh-btn').prop('disabled', true)
+  $('[id^="panel-loading-"]').show()
+  $('[id^="panel-content-"]').hide()
+  $.ajax({
+    method: 'POST',
+    url: '/api/load',
+    context: this,
+    error: resp => console.log(resp),
+    success: resp => {
+      for (id of LANGUAGES)
+        request(id)
+      setTimeout(() => {
+        $('#refresh-btn').prop('disabled', false)
+      }, 5000)
+    }
+  })
 }
 
 // Activate language tab
-function activate(tabId) {
-  $('[id^="language-tab-"]').removeClass('active')
-  $('[id^="language-panel-"]').hide()
-  $(`#language-tab-${tabId}`).addClass('active')
-  $(`#language-panel-${tabId}`).show()
-  console.log('OK')
+function activate(id) {
+  $('[id^="panel-tab-"]').removeClass('active')
+  $('[id^="panel-board-"]').hide()
+  $(`#panel-tab-${id}`).addClass('active')
+  $(`#panel-board-${id}`).show()
 }
-
-// Refresh entire database
-function refreshAll() {}
 
 // Display repository details in modal
-function display(repository) {}
-
-/*
-// Monta a linha em HTML de um registro de produto
-function montarLinha(produto) {
-  return `
-    <tr id="produto-${produto.id}">
-      <td>${produto.id}</td>
-      <td>${produto.nome}</td>
-      <td>${produto.estoque}</td>
-      <td>$ ${parseFloat(produto.preco).toFixed(2)}</td>
-      <td>${produto.categoria.nome}</td>
-      <td>
-        <button class="btn btn-sm btn-primary" onclick="carregarForm(${produto.id})">Editar</button>
-        <button class="btn btn-sm btn-danger" onclick="excluirProduto(${produto.id})">Excluir</button>
-      </td>
-    </tr>
-  `
-}
-
-// Captura a lista de produtos
-function carregarProdutos() {
-  $.getJSON('/api/produtos', function(resp) {
-    for (var i = 0; i < resp.length; i++) {
-      $('#tabela-produtos>tbody').append(montarLinha(resp[i]))
-    }
-  })
-}
-
-// Captura a lista de categorias para adicionar ao combobox
-function carregarCategorias() {
-  $.getJSON('/api/categorias', function(resp) {
-    for (var i = 0; i < resp.length; i++) {
-      $('#form-produtos-categoria').append(`<option value="${resp[i].id}">${resp[i].nome}</option>`)
-    }
-  })
-}
-
-// Exibe o formulário para criação/edição de produto
-function carregarForm(id) {
-  $('#form-produtos-titulo').html(id ? `Produto ${id}` : 'Novo Produto')
-  if (id)
-    $.getJSON(`/api/produtos/${id}`, function(resp) {
-      carregarCampos(resp)
-    })
-  else
-    carregarCampos()
-  $('#modal-produtos').modal('show')
-}
-
-// Carrega os valores dos campos do formulário
-function carregarCampos(produto) {
-  $('#form-produtos-id').val(produto ? produto.id : ''),
-  $('#form-produtos-nome').val(produto ? produto.nome : ''),
-  $('#form-produtos-estoque').val(produto ? produto.estoque : ''),
-  $('#form-produtos-preco').val(produto ? produto.preco : ''),
-  $('#form-produtos-categoria').val(produto ? produto.categoria.id : '')
-}
-
-// Enviar formulário para criaão de produto
-function criarProduto(produto) {
-  $.post('/api/produtos', produto, function(resp) {
-    $('#tabela-produtos>tbody').append(montarLinha(resp))
-  })
-}
-
-// Requisitar exclusão de registro de produto
-function excluirProduto(id) {
-  if (confirm(`Tem certeza de que quer excluir o produto ${id}?`)) {
-    $.ajax({
-      type: 'DELETE',
-      url: `/api/produtos/${id}`,
-      context: this,
-      success: function(resp) {
-        console.log(`=> '${resp.nome}' excluído com sucesso.`)
-        $(`#produto-${id}`).remove()
-      },
-      error: error => console.log(error)
-    })
-  }
-}
-
-// Carregar formulário para edição de produto
-function editarProduto(produto) {
+function display(id) {
+  $('#repository-modal').modal('show')
+  const loading = $('#modal-loading').show()
+  const content = $("#modal-content").hide()
   $.ajax({
-    type: 'PUT',
-    data: produto,
-    url: `/api/produtos/${produto.id}`,
+    method: 'GET',
+    url: `/api/repository/${id}`,
     context: this,
-    success: function(resp) {
-      $(`#produto-${resp.id}`).replaceWith(montarLinha(resp))
-    },
-    error: error => console.log(error)
+    dataType: 'json',
+    error: resp => console.log(resp),
+    success: resp => {
+      console.log(resp)
+      loading.hide()
+      content.show()
+    }
   })
 }
 
-// Configura evento de submissão para o formulário
-$('#form-produtos').submit(function(event) {
-  event.preventDefault()
-  const produto = {
-    id:        $('#form-produtos-id').val(),
-    nome:      $('#form-produtos-nome').val(),
-    estoque:   $('#form-produtos-estoque').val(),
-    preco:     $('#form-produtos-preco').val(),
-    categoria: $('#form-produtos-categoria').val()
-  }
-  if (produto.id)
-    editarProduto(produto)
-  else
-    criarProduto(produto)
-  $('#modal-produtos').modal('hide')
+// Run functions when page finished loading
+$(document).ready(function() {
+  for (id of LANGUAGES)
+    request(id)
 })
-
-$(function() {
-  carregarProdutos()
-  carregarCategorias()
-})
-*/

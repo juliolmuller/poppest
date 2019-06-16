@@ -43,62 +43,6 @@ header .intro-text .skills {
   font-weight: 300;
 }
 
-section {
-  padding: 100px 0;
-  width: 100%;
-}
-
-section h2 {
-  margin: 0;
-  font-size: 3em;
-}
-
-hr.star-light, hr.star-primary {
-  margin: 25px auto 30px;
-  padding: 0;
-  max-width: 250px;
-  border: 0;
-  border-top: solid 5px;
-  text-align: center;
-}
-
-hr.star-light:after, hr.star-primary:after {
-  content: "\f005";
-  display: inline-block;
-  position: relative;
-  top: -.8em;
-  padding: 0 .25em;
-  font-family: FontAwesome;
-  font-size: 2em;
-}
-
-hr.star-light {
-  border-color: #fff;
-}
-
-hr.star-light:after {
-  color: #fff;
-  background-color: #18bc9c;
-}
-
-hr.star-primary {
-  border-color: #2c3e50;
-}
-
-hr.star-primary:after {
-  color: #2c3e50;
-  background-color: #fff;
-}
-
-section.primary h2{
-  color: #2c3e50;
-}
-
-section.success{
-  background-color: #18bc9c;
-  color: #fff;
-}
-
 .inline {
   display: inline;
   margin-left: 20px;
@@ -108,4 +52,12 @@ section.success{
   float: left;
   max-height: 50px;
   margin-right: 20px;
+}
+
+.progress {
+  visibility: hidden;
+}
+
+#navbar {
+  margin-top: 20px;
 }
