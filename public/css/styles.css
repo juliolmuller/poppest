@@ -45,7 +45,7 @@ header .intro-text .skills {
 
 .inline {
   display: inline;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .repo-avatar {
@@ -60,4 +60,12 @@ header .intro-text .skills {
 
 #navbar {
   margin-top: 20px;
+}
+
+.modal-avatar {
+  height: 140px;
+}
+
+.modal-header {
+  display: block;
 }

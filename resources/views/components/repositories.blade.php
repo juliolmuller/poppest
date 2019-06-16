@@ -7,10 +7,7 @@
             <img class="repo-avatar rounded" src="{{ $repository->avatar }}" alt="Repository avatar">
             <small>by {{ $repository->owner }}</small>
             <h4 class="card-title">{{ $repository->name }}</h4>
-            <div class="card-footer">
-              <a href="#" class="btn btn-success" onclick="display({{ $repository->id }})">
-                Details...
-              </a>
+            <div class="card-footer text-right">
               <div class="inline">
                 <svg viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
                   <path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path>
@@ -23,6 +20,9 @@
                 </svg>
                 {{ number_format($repository->forks) }}
               </div>
+              <button class="btn btn-success" onclick="display({{ $repository->id }}, '{{ number_format($repository->stars) }}', '{{ number_format($repository->forks) }}', '{{ $repository->language->name }}')">
+                  Details
+                </button>
             </div>
           </div>
         </div>

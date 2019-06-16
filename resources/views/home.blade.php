@@ -21,7 +21,7 @@
       </div>
       <div class="row">
         <div class="progress col-sm-12">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0" aria-valuemax="100"></div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%" aria-valuemax="100"></div>
         </div>
       </div>
       <nav id="navbar" class="nav nav-pills nav-fill">

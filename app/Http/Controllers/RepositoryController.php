@@ -52,7 +52,7 @@ class RepositoryController extends Controller
      */
     function display($repositoryId)
     {
-        $repository = Repository::find($repositoryId);
+        $repository = Repository::with(['language'])->find($repositoryId);
         if (is_null($repository))
             return response(['errors' => "Unable to capture data for repository #{$repositoryId}"], 422);
         return $repository;

@@ -19,6 +19,7 @@ function request(id) {
 
 // Require database update
 function refresh() {
+  const progressBar = $('.progress').css('visibility', 'visible')
   $('#refresh-btn').prop('disabled', true)
   $('[id^="panel-loading-"]').show()
   $('[id^="panel-content-"]').hide()
@@ -26,12 +27,13 @@ function refresh() {
     method: 'POST',
     url: '/api/load',
     context: this,
-    error: resp => console.log(resp),
+    error: resp => alert(resp),
     success: resp => {
       for (id of LANGUAGES)
         request(id)
       setTimeout(() => {
         $('#refresh-btn').prop('disabled', false)
+        progressBar.css('visibility', 'hidden')
       }, 5000)
     }
   })
@@ -46,7 +48,7 @@ function activate(id) {
 }
 
 // Display repository details in modal
-function display(id) {
+function display(id, stars, forks, language) {
   $('#repository-modal').modal('show')
   const loading = $('#modal-loading').show()
   const content = $("#modal-content").hide()
@@ -57,7 +59,14 @@ function display(id) {
     dataType: 'json',
     error: resp => console.log(resp),
     success: resp => {
-      console.log(resp)
+      $('.modal-avatar').attr('src', resp.avatar)
+      $('.modal-title').html(resp.name)
+      $('.modal-author').html('by ' + resp.name)
+      $('.modal-body p').html(resp.description.replace('\n', '</p><p>'))
+      $('#modal-stars').html(stars)
+      $('#modal-forks').html(forks)
+      $('#modal-language').html(language)
+      $('#modal-link').attr('href', resp.url)
       loading.hide()
       content.show()
     }
