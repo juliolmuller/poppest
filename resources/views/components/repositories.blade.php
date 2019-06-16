@@ -1,3 +1,4 @@
+
 <div id="panel-content-{{ $id }}" class="content">
   <div class="row">
     @foreach ($repositories as $repository)

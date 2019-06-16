@@ -38,7 +38,7 @@ class RepositoryController extends Controller
      */
     public function show($languageId)
     {
-        $repositories = Repository::where('language_id', $languageId)->get();
+        $repositories = Repository::where('language_id', $languageId)->orderBy('stars', 'DESC')->get();
         if (!count($repositories))
             return response(['errors' => "No records found for language '{$languageId}'"], 422);
         return view('components.repositories', [
