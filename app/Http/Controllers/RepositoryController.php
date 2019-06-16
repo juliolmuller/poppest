@@ -23,7 +23,7 @@ class RepositoryController extends Controller
     public function load(int $languageId = 0)
     {
         // If no ID was provided, reset all
-        if (empty($languageId)) {
+        if (!$languageId) {
             Repository::reset(Language::all());
             return response(['success' => 'All languages updated successfully,'], 200);
         }

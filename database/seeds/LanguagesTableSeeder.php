@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class LanguagesTableSeeder extends Seeder
 {
     /**
-     * Seed the 'languages' table with the records chosen within the model.
+     * Seed the 'languages' table with the records chosen bu me.
      */
     public function run()
     {
