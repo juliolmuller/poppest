@@ -21,7 +21,7 @@
                 </svg>
                 {{ number_format($repository->forks) }}
               </div>
-              <button class="btn btn-success" onclick="display({{ $repository->id }}, '{{ number_format($repository->stars) }}', '{{ number_format($repository->forks) }}', '{{ $repository->language->name }}')">
+              <button class="btn btn-pop" onclick="display({{ $repository->id }}, '{{ number_format($repository->stars) }}', '{{ number_format($repository->forks) }}', '{{ $repository->language->name }}')">
                   Details
                 </button>
             </div>

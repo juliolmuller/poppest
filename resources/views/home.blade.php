@@ -14,19 +14,19 @@
           </h2>
         </div>
         <div class="col-xs-12 col-sm-2">
-          <button id="refresh-btn" type="button" class="btn btn-lg btn-outline-success btn-block" onclick="refresh()">
+          <button id="refresh-btn" type="button" class="btn btn-lg btn-outline-pop btn-block" onclick="refresh()">
             Refresh
           </button>
         </div>
       </div>
       <div class="row">
         <div class="progress col-sm-12">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%" aria-valuemax="100"></div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-pop" role="progressbar" style="width: 100%" aria-valuemax="100"></div>
         </div>
       </div>
       <nav id="navbar" class="nav nav-pills nav-fill">
         @foreach ($languages as $language)
-          <a href="#" id="panel-tab-{{ $language->id }}" onclick="activate({{ $language->id }})" class="btn btn-outline-success nav-item">{{ $language->name }}</a>
+          <a href="#" id="panel-tab-{{ $language->id }}" onclick="activate({{ $language->id }})" class="btn btn-outline-pop nav-item">{{ $language->name }}</a>
         @endforeach
       </nav>
       <div id="panel-main">

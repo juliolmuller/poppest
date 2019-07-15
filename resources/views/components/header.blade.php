@@ -1,6 +1,6 @@
 
 <!-- Page header -->
-<header id="page-top">
+<header id="page-top" class="bg-pop">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">

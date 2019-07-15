@@ -40,7 +40,7 @@
           </svg>
           See GitHub repository
         </a>
-        <a href="#" id="modal-close" type="cancel" class="btn btn-success" data-dismiss="modal">Close</a>
+        <a href="#" id="modal-close" type="cancel" class="btn btn-pop" data-dismiss="modal">Close</a>
       </div>
     </div>
   </div>
