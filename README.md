@@ -3,8 +3,8 @@
 
 - **Develepoled by:** [Julio L. Muller](https://github.com/juliolmuller)
 - **Released on:** Jun 16, 2019
-- **Updated on:** Jun 16, 2019
-- **Latest version:** 1.0.0
+- **Updated on:** Aug 7, 2019
+- **Latest version:** 1.0.2
 - **License:** MIT
 
 ## Overview
