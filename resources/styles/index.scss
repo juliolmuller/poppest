@@ -1,0 +1,45 @@
+
+/**
+ * Import external fonts
+ */
+ @import url('https://fonts.googleapis.com/css?family=Nunito');
+ @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/**
+ * Define theme color to the application
+ */
+ $theme-colors: (
+  'pop': #18bc9c
+);
+
+/**
+ * Import styles framework
+ */
+@import '~bootstrap/scss/bootstrap';
+
+/**
+* Additional custom styles
+*/
+* {
+  font-family: FontAwesome;
+}
+
+.progress {
+  visibility: hidden;
+}
+
+#navbar {
+  margin-top: 20px;
+}
+
+.card:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+/*
+* Fix modal backdrop mispositioning
+*/
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}

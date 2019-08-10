@@ -1,3 +1,4 @@
+const mix = require('laravel-mix')
 
 /*
  |--------------------------------------------------------------------------
@@ -10,10 +11,8 @@
  |
  */
 
-const mix = require('laravel-mix')
-
 mix.disableNotifications()
 
 mix
-  .js('resources/scripts/libs.js', 'js/libs.js')
-  .sass('resources/styles/libs.scss', 'css/libs.css')
+  .react('resources/scripts/index.js', 'public/js')
+  .sass('resources/styles/index.scss', 'public/css')
