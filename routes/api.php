@@ -1,16 +1,12 @@
 <?php
 
+
 /**
  * Request full-update to the database (capture recent info from GitHub API)
  */
-Route::post('/load/{languageId?}', 'RepositoryController@load');
+Route::post('/load/{languageId?}', 'AppController@load');
 
 /**
  * Capture all records for the parameter 'languageId'
  */
-Route::post('/show/{languageId}', 'RepositoryController@show');
-
-/**
- * Capture data for a single repository record
- */
-Route::get('/repository/{repositoryId}', 'RepositoryController@display');
+Route::get('/show/{languageId}', 'AppController@show');

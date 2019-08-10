@@ -1,6 +1,6 @@
 <?php
 
 /**
- * Route to the home page of the application.
+ * Define catch-all route to access the application
  */
-Route::get('/', 'RepositoryController@index');
+Route::any('/{any?}', 'AppController@index')->where('any', '^(?!api/).*$');
