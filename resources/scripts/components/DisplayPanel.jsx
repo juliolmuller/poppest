@@ -1,13 +1,53 @@
 import React, { Component } from 'react'
 import Repo from './Repo'
 import Modal from './Modal'
+import api from './../services/ApiConsumer'
 import loading from './../assets/loading.gif'
 
 class DisplayPanel extends Component {
 
   state = {
+    isLoading: false,
+    repositories: [],
     visibleDetails: false,
     detailsFor: {}
+  }
+
+  componentDidMount() {
+    this.setState({
+      isLoading: true,
+      repositories: []
+    })
+    this.displayContent()
+    api.getRepositories(1) // FIXME: Make request dynamic
+      .then(response => this.setState({ repositories: response.data }))
+      .catch(response => console.log(response))
+      .finally(this.setState({ isLoading: false }))
+  }
+
+  displayContent = () => {
+    if (this.state.isLoading) {
+      return (
+        <div id="panel-loading-{{ $language->id }}" className="content text-center">
+          <img src={loading} alt="Loading animation" />
+        </div>
+      )
+    }
+    return (
+      <div className="row">
+        {
+          this.state.repositories.map((repo, index) => {
+            return (
+              <Repo
+                key={index}
+                repo={repo}
+                showDetails={this.toggleDetails}
+              />
+            )
+          })
+        }
+      </div>
+    )
   }
 
   toggleDetails = (repo = {}) => {
@@ -24,78 +64,10 @@ class DisplayPanel extends Component {
   }
 
   render() {
-    const testing = [
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      },
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      },
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      },
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      },
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      },
-      {
-        owner: 'Julio Muller',
-        name: 'My Repo',
-        avatar: loading,
-        stars: '1,234',
-        forks: '1,234',
-        url: 'http://google.com',
-        language: { name: 'PHP' }
-      }
-    ]
     return (
       <div className="content">
-        <div className="row">
-          {
-            testing.map((t, i) => {
-              return (
-                <Repo
-                  key={i}
-                  repo={t}
-                  showDetails={this.toggleDetails}
-                />
-              )
-            })
-          }
-        </div>
-      {this.getDetails()}
+        {this.displayContent()}
+        {this.getDetails()}
       </div>
     )
   }
