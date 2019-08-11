@@ -20,7 +20,31 @@ class Tokenizer
     public function __construct()
     {
         $this->timestamp = time();
-        $this->token = md5($this->timestamp . env("APP_KEY"));
+        $this->token = self::generate($this->timestamp);
+    }
+
+    /**
+     * Generate token using MD5
+     */
+    private static function generate(string $timestamp)
+    {
+        return md5($timestamp . env("APP_KEY"));
+    }
+
+    /**
+     * Validate incoming token integrity
+     */
+    public static function isValid(string $token, int $timestamp)
+    {
+        return (!self::isExpired($token, $timestamp) && self::generate($timestamp) === $token);
+    }
+
+    /**
+     * Validate incoming token expiration
+     */
+    public static function isExpired(string $token, int $timestamp)
+    {
+        return ($timestamp + 86400 < time());
     }
 
     /**

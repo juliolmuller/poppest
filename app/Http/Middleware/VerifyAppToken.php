@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Closure;
+use Illuminate\Http\Request;
+use App\Services\Tokenizer;
 
 class VerifyAppToken
 {
@@ -13,17 +14,14 @@ class VerifyAppToken
     public function handle(Request $request, Closure $next)
     {
         if ($request->hasHeader('X-TIMESTAMP') && $request->hasHeader('X-TOKEN')) {
-            if (md5($request->header('X-TIMESTAMP') . env('APP_KEY')) === $request->header('X-TOKEN')) {
-                return $next($request);
+            if (Tokenizer::isExpired($request->header('X-TOKEN'), $request->header('X-TIMESTAMP'))) {
+                return response(['error' => 'Token has expired'], 409);
             }
-            return response()->json([
-                'error' => 'Not match',
-                'ts' => $request->header('X-TIMESTAMP'),
-                'token' => $request->header('X-TOKEN'),
-            ], 403);
+            if (!Tokenizer::isValid($request->header('X-TOKEN'), $request->header('X-TIMESTAMP'))) {
+                return response(['error' => 'Token is invalid'], 409);
+            }
+            return $next($request);
         }
-        return response()->json([
-            'error' => 'Request does not contain the validation token',
-        ], 403);
+        return response(['error' => 'Request does not contain the validation token'], 403);
     }
 }
