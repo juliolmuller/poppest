@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Repo from './Repo'
-// import Modal from './Modal'
+import Modal from './Modal'
 import loading from './../assets/loading.gif'
 
 class DisplayPanel extends Component {
@@ -19,7 +19,7 @@ class DisplayPanel extends Component {
 
   getDetails = () => {
     if (this.state.visibleDetails) {
-      // return <Modal repo={this.state.detailsFor} hideDetails={this.toggleDetails} />
+      return <Modal repo={this.state.detailsFor} hideDetails={this.toggleDetails} />
     }
   }
 
