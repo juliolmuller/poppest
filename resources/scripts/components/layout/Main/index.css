@@ -1,0 +1,8 @@
+
+main {
+  position: absolute;
+  background-color: #fff;
+  top: 25%;
+  z-index: 2;
+  padding-top: 1em;
+}
