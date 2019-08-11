@@ -38,27 +38,22 @@ class AppController extends Controller
     }
 
     /**
-     * Returns the view for Repositories List
+     * Return the list of languages available in the database
      */
-    public function show($languageId)
+    public function getLanguages()
     {
-        $repositories = Repository::where('language_id', $languageId)->orderBy('stars', 'DESC')->get();
-        if (!count($repositories))
-            return response(['errors' => "No records found for language '{$languageId}'"], 422);
-        return view('components.repositories', [
-            'id' => $languageId,
-            'repositories' => $repositories
-        ]);
+        $languages = Language::all();
+        return $languages;
     }
 
     /**
-     * Display details for the repository
+     * Returns the view for Repositories List
      */
-    function display($repositoryId)
+    public function getRepositories($languageId)
     {
-        $repository = Repository::with(['language'])->find($repositoryId);
-        if (is_null($repository))
-            return response(['errors' => "Unable to capture data for repository #{$repositoryId}"], 422);
-        return $repository;
+        $repositories = Repository::where('language_id', $languageId)->with('language')->orderBy('stars', 'DESC')->get();
+        if (!count($repositories))
+            return response(['error' => "No records found for language #{$languageId}"], 409);
+        return $repositories;
     }
 }
