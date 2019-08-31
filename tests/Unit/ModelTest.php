@@ -3,6 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Language;
+use App\Repository;
 
 class ModelTest extends TestCase
 {
@@ -10,7 +12,7 @@ class ModelTest extends TestCase
      * Constants for the tests.
      */
     private const COUNT_FACTOR_1 = 5;  // Number of 'languages' (defined within seeder)
-    private const COUNT_FACTOR_2 = 30; // Number of records retrieved from GitHub API
+    private const COUNT_FACTOR_2 = 30; // Number of repositories per language received from GitHub
 
     /**
      * Count the number of records in 'languages' table.
@@ -20,11 +22,11 @@ class ModelTest extends TestCase
     public function tables_records_count_test()
     {
         // Check quantity of records in 'languages' table
-        $count = \App\Language::count();
+        $count = Language::count();
         $this->assertEquals(self::COUNT_FACTOR_1, $count);
 
         // Check quantity of records in 'repositories' table
-        $count = \App\Repository::count();
+        $count = Repository::count();
         $this->assertEquals(self::COUNT_FACTOR_1 * self::COUNT_FACTOR_2, $count);
     }
 
@@ -35,9 +37,9 @@ class ModelTest extends TestCase
      */
     public function repositories_per_language_count_test()
     {
-        $languages = \App\Language::all();
+        $languages = Language::all();
         foreach ($languages as $language) {
-            $count = \App\Repository::where('language_id', $language->id)->count();
+            $count = Repository::where('language_id', $language->id)->count();
             $this->assertEquals(self::COUNT_FACTOR_2, $count);
         }
     }
