@@ -28,7 +28,9 @@ class DisplayPanel extends Component {
       api.getRepositories(this.props.activeLang)
         .then(response => this.setState({ repositories: response.data }))
         .catch(response => console.log(response))
-        .finally(this.setState({ isLoading: false }))
+        .finally(setTimeout(() => {
+          this.setState({ isLoading: false })
+        }, 500))
     }
   }
 
