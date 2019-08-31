@@ -15,10 +15,6 @@ class DisplayPanel extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      isLoading: true,
-      repositories: []
-    })
     this.componentDidUpdate(this.props.activeLang)
   }
 

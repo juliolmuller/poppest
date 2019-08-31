@@ -30,9 +30,12 @@ class ControlPanel extends Component {
 
   refreshResources = () => {
     this.setState({ isRefreshing: true })
-    setTimeout(() => {
-      this.setState({ isRefreshing: false })
-    }, 2000)
+    api.refreshDatabase()
+      .catch(response => console.log(response))
+      .finally(() => {
+        this.props.activateTab(this.props.activeLang)
+        this.setState({ isRefreshing: false })
+      })
   }
 
   render() {
@@ -68,6 +71,7 @@ class ControlPanel extends Component {
                   type="button"
                   id={`activate-lang-${lang.id}`}
                   className={`btn btn-outline-pop nav-item ${this.props.activeLang === lang.id ? 'active' : ''}`}
+                  disabled={this.state.isRefreshing}
                   onClick={this.props.activateTab.bind(this, lang.id)}
                 >{lang.name}</button>
               )
