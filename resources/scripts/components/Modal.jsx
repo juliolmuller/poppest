@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import $ from 'jquery'
+import 'bootstrap'
 import star from './../assets/icon-star.svg'
 import fork from './../assets/icon-fork.svg'
 import code from './../assets/icon-code.svg'
@@ -10,14 +11,17 @@ class Modal extends Component {
 
   componentDidMount() {
     $('#repo-details').on('hidden.bs.modal', e => {
-      this.props.hideDetails.bind(this)
+      this.props.hideDetails()
     }).click(e => $(e.target).modal('hide'))
     this.componentDidUpdate()
   }
 
   componentDidUpdate() {
     $('#repo-details').modal('show')
-    $('body').css('padding-right', '')
+    $('body').css({
+      'padding-right': '',
+      'overflow': 'auto'
+    })
   }
 
   render() {
@@ -43,7 +47,7 @@ class Modal extends Component {
                   {this.props.repo.stars}
                 </div>
                 <div className="d-inline border border-primary text-primary rounded px-2">
-                  <img src={fork} className="mr-1" alt="Icon for forks count" aria-hidden="true" />    
+                  <img src={fork} className="mr-1" alt="Icon for forks count" aria-hidden="true" />
                   {this.props.repo.forks}
                 </div>
                 <div className="d-inline border border-danger text-danger rounded px-2">

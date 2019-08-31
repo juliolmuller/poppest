@@ -11,7 +11,7 @@ class DisplayPanel extends Component {
     isLoading: false,
     repositories: [],
     visibleDetails: false,
-    detailsFor: {}
+    detailsFor: null
   }
 
   componentDidMount() {
@@ -34,10 +34,10 @@ class DisplayPanel extends Component {
     }
   }
 
-  toggleDetails = (repo = {}) => {
+  toggleDetails = (repo = null) => {
     this.setState({
       visibleDetails: !!repo,
-      detailsFor: repo
+      detailsFor: repo || {}
     })
   }
 
