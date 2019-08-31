@@ -9,7 +9,7 @@ Route::post('/load/{languageId?}', 'AppController@load');
 /**
  * Get list of languages stored in database
  */
-ROute::get('/languages', 'AppController@getLanguages');
+Route::get('/languages', 'AppController@getLanguages');
 
 /**
  * Capture all records for the parameter 'languageId'
