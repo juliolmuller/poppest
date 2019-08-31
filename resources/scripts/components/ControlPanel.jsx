@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import api from './../services/ApiConsumer'
 import loading from './../assets/loading.gif'
 
 class ControlPanel extends Component {
+
+  state = {
+    languages: []
+  }
+
+  componentDidMount() {
+    api.getLanguages()
+      .then(response => this.setState({ languages: response.data }))
+      .catch(response => console.log(response))
+  }
 
   render() {
     return (
@@ -24,11 +36,19 @@ class ControlPanel extends Component {
           </div>
         </div>
         <nav id="navbar" className="nav nav-pills nav-fill">
-          <a href="#" id="panel-tab-{{ $language->id }}" className="btn btn-outline-pop nav-item">language->name</a>
-          <a href="#" id="panel-tab-{{ $language->id }}" className="btn btn-outline-pop nav-item">language->name</a>
-          <a href="#" id="panel-tab-{{ $language->id }}" className="btn btn-outline-pop nav-item">language->name</a>
-          <a href="#" id="panel-tab-{{ $language->id }}" className="btn btn-outline-pop nav-item">language->name</a>
-          <a href="#" id="panel-tab-{{ $language->id }}" className="btn btn-outline-pop nav-item">language->name</a>
+          {
+            this.state.languages.map(lang => {
+              return (
+                <button
+                  key={lang.id}
+                  type="button"
+                  id={`activate-lang-${lang.id}`}
+                  className={`btn btn-outline-pop nav-item ${this.props.activeLang === lang.id ? 'active' : ''}`}
+                  onClick={this.props.activateTab.bind(this, lang.id)}
+                >{lang.name}</button>
+              )
+            })
+          }
         </nav>
         <div id="panel-main">
           <div id="panel-board-{{ $language->id }}" style={{ display: 'none' }}>
@@ -41,6 +61,11 @@ class ControlPanel extends Component {
       </React.Fragment>
     )
   }
+}
+
+ControlPanel.propTypes = {
+  activeLang: PropTypes.number,
+  activateTab: PropTypes.func.isRequired
 }
 
 export default ControlPanel

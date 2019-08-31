@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Repo from './Repo'
 import Modal from './Modal'
 import api from './../services/ApiConsumer'
@@ -18,36 +19,17 @@ class DisplayPanel extends Component {
       isLoading: true,
       repositories: []
     })
-    this.displayContent()
-    api.getRepositories(1) // FIXME: Make request dynamic
-      .then(response => this.setState({ repositories: response.data }))
-      .catch(response => console.log(response))
-      .finally(this.setState({ isLoading: false }))
+    this.componentDidUpdate(this.props.activeLang)
   }
 
-  displayContent = () => {
-    if (this.state.isLoading) {
-      return (
-        <div id="panel-loading-{{ $language->id }}" className="content text-center">
-          <img src={loading} alt="Loading animation" />
-        </div>
-      )
+  componentDidUpdate(prevProps) {
+    if (this.props.activeLang !== prevProps.activeLang) {
+      this.setState({ isLoading: true })
+      api.getRepositories(this.props.activeLang)
+        .then(response => this.setState({ repositories: response.data }))
+        .catch(response => console.log(response))
+        .finally(this.setState({ isLoading: false }))
     }
-    return (
-      <div className="row">
-        {
-          this.state.repositories.map((repo, index) => {
-            return (
-              <Repo
-                key={index}
-                repo={repo}
-                showDetails={this.toggleDetails}
-              />
-            )
-          })
-        }
-      </div>
-    )
   }
 
   toggleDetails = (repo = {}) => {
@@ -66,11 +48,30 @@ class DisplayPanel extends Component {
   render() {
     return (
       <div className="content">
-        {this.displayContent()}
+        <div className={`content text-center ${this.state.isLoading ? '' : 'd-none'}`}>
+          <img src={loading} alt="Loading animation" />
+        </div>
+        <div className={`row ${this.state.isLoading ? 'd-none' : ''}`}>
+          {
+            this.state.repositories.map((repo, index) => {
+              return (
+                <Repo
+                  key={index}
+                  repo={repo}
+                  showDetails={this.toggleDetails}
+                />
+              )
+            })
+          }
+        </div>
         {this.getDetails()}
       </div>
     )
   }
+}
+
+DisplayPanel.propTypes = {
+  activeLang: PropTypes.number
 }
 
 export default DisplayPanel
