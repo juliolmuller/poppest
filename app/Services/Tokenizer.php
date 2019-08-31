@@ -17,16 +17,16 @@ class Tokenizer
     /**
      * Instanciate tokenizer
      */
-    public function __construct()
+    public function __construct(int $simestamp = null, string $token = null)
     {
-        $this->timestamp = time();
-        $this->token = self::generate($this->timestamp);
+        $this->timestamp = $simestamp ?? time();
+        $this->token = $token ?? self::generate($this->timestamp);
     }
 
     /**
      * Generate token using MD5
      */
-    private static function generate(string $timestamp)
+    private static function generate(int $timestamp)
     {
         return md5($timestamp . env("APP_KEY"));
     }
@@ -34,17 +34,17 @@ class Tokenizer
     /**
      * Validate incoming token integrity
      */
-    public static function isValid(string $token, int $timestamp)
+    public function isValid()
     {
-        return (!self::isExpired($token, $timestamp) && self::generate($timestamp) === $token);
+        return (!$this->isExpired() && self::generate($this->timestamp) === $this->token);
     }
 
     /**
      * Validate incoming token expiration
      */
-    public static function isExpired(string $token, int $timestamp)
+    public function isExpired()
     {
-        return ($timestamp + 86400 < time());
+        return ($this->timestamp + 86400 < time());
     }
 
     /**
