@@ -6,13 +6,33 @@ import loading from './../assets/loading.gif'
 class ControlPanel extends Component {
 
   state = {
-    languages: []
+    languages: [],
+    isRefreshing: false
   }
 
   componentDidMount() {
     api.getLanguages()
       .then(response => this.setState({ languages: response.data }))
       .catch(response => console.log(response))
+  }
+
+  getRefreshmentStyles = () => {
+    if (this.state.isRefreshing) {
+      return {
+        background: `url(${loading})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        color: 'rgb(0, 0, 0, 0)',
+        overflow: 'hidden'
+      }
+    }
+  }
+
+  refreshResources = () => {
+    this.setState({ isRefreshing: true })
+    setTimeout(() => {
+      this.setState({ isRefreshing: false })
+    }, 2000)
   }
 
   render() {
@@ -25,9 +45,13 @@ class ControlPanel extends Component {
             </h2>
           </div>
           <div className="col-12 col-sm-2">
-            <button type="button" className="btn btn-lg btn-outline-pop btn-block">
-              Refresh
-            </button>
+            <button
+              type="button"
+              className="btn btn-lg btn-outline-pop btn-block"
+              style={this.getRefreshmentStyles()}
+              disabled={this.state.isRefreshing}
+              onClick={this.refreshResources}
+            >Refresh</button>
           </div>
         </div>
         <div className="row">
