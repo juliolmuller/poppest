@@ -26,7 +26,7 @@ class DisplayPanel extends Component {
         .catch(response => console.log(response))
         .finally(setTimeout(() => {
           this.setState({ isLoading: false })
-        }, 500))
+        }, 1000))
     }
   }
 
