@@ -3,8 +3,8 @@
 
 - **Develepoled by:** [Julio L. Muller](https://github.com/juliolmuller)
 - **Released on:** Jun 16, 2019
-- **Updated on:** Aug 7, 2019
-- **Latest version:** 1.0.2
+- **Updated on:** Sep 1, 2019
+- **Latest version:** 1.1.0
 - **License:** MIT
 
 ## Overview
@@ -67,7 +67,9 @@ As part of the challenge, the project should contain scripts for testing (includ
 "./vendor/bin/phpunit"
 ```
 
-The tests execute 771 assertions related to HTTP requests (routes), database content and data consistency.
+The tests execute 40 assertions related to HTTP requests (routes), database content and data consistency.
+
+NOTE: *these tests are only for the server-side app, written in PHP. Front-end testing, which would include the React aaplication, was not done.*
 
 ## Technologies
 
@@ -83,8 +85,9 @@ Here are the main technologies used to build this project:
 
 ### Front-End
 
+- JavaScript Libraries/Frameworks: [React 16](https://reactjs.org) & [jQuery 3](https://jquery.com/)
 - Styles: [Bootstrap 4](https://getbootstrap.com/)
-- JS Framework: [jQuery 3](https://jquery.com/)
+- HTTP Client: [Axios](https://github.com/axios/axios)
 - Front-End Header Template: [brojask's](https://bootsnipp.com/brojask)
 
 ### Deploy
