@@ -29,12 +29,12 @@ class AppController extends Controller
         // If no ID was provided, reset all
         if (!$languageId) {
             Repository::reset(Language::all());
-            return response(['success' => 'All languages updated successfully,'], 200);
+            return response(['success' => 'All languages updated successfully'], 200);
         }
 
         // If there is an ID reset requested languages
         Repository::reset(Language::find($languageId));
-        return response(['success' => 'Languages #' . $languageId . ' updated successfully,'], 200);
+        return response(['success' => 'Languages #' . $languageId . ' updated successfully'], 200);
     }
 
     /**
