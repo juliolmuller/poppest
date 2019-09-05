@@ -1,10 +1,10 @@
 
 # Poppest - The Most Popular Repositories in GitHub
 
-- **Develepoled by:** [Julio L. Muller](https://github.com/juliolmuller)
+- **Develepoled by:** [Julio L. Muller](https://juliolmuller.github.io/)
 - **Released on:** Jun 16, 2019
-- **Updated on:** Sep 1, 2019
-- **Latest version:** 1.1.0
+- **Updated on:** Sep 5, 2019
+- **Latest version:** 1.1.1
 - **License:** MIT
 
 ## Overview

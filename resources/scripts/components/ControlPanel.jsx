@@ -43,7 +43,10 @@ class ControlPanel extends Component {
       <React.Fragment>
         <div className="row">
           <div className="col-12 col-sm-10">
-            <h2 className="content-header">
+            <h2 className="content-header d-md-none" aria-hidden>
+              Pick a language:
+            </h2>
+            <h2 className="content-header d-none d-md-block">
               Pick your favorite language:
             </h2>
           </div>
@@ -55,11 +58,6 @@ class ControlPanel extends Component {
               disabled={this.state.isRefreshing}
               onClick={this.refreshResources}
             >Refresh</button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="progress col-sm-12">
-            <div className="progress-bar progress-bar-striped progress-bar-animated bg-pop" role="progressbar" style={{ width: '100%' }} aria-valuemax="100"></div>
           </div>
         </div>
         <nav className="nav nav-pills nav-fill">

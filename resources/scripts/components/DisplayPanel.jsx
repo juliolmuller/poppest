@@ -45,9 +45,9 @@ class DisplayPanel extends Component {
 
   render() {
     return (
-      <div className="content">
-        <div className={`content text-center ${this.state.isLoading ? '' : 'd-none'}`}>
-          <img src={loading} alt="Loading animation" />
+      <div>
+        <div className={`text-center ${this.state.isLoading ? '' : 'd-none'}`}>
+          <img src={loading} style={{ width: '100%', maxWidth: '600px' }} alt="Loading animation" />
         </div>
         <div className={`row ${this.state.isLoading ? 'd-none' : ''}`}>
           {
