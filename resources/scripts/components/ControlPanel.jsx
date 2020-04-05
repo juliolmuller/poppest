@@ -42,7 +42,7 @@ class ControlPanel extends Component {
     return (
       <React.Fragment>
         <div className="row">
-          <div className="col-12 col-sm-10">
+          <div className="col-12 col-sm-10 mb-4">
             <h2 className="content-header d-md-none" aria-hidden>
               Pick a language:
             </h2>
