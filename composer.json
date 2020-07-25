@@ -2,6 +2,8 @@
   "name": "juliolmuller/poppest",
   "type": "project",
   "description": "Poppest - The Most Popular Repositories in GitHub.",
+  "version": "1.2.2",
+  "license": "MIT",
   "keywords": [
     "ateliware",
     "github",
@@ -12,7 +14,6 @@
     "node.js",
     "bootstrap"
   ],
-  "license": "MIT",
   "require": {
     "php": "^7.2.0",
     "fideloper/proxy": "^4.0",
@@ -26,7 +27,7 @@
     "fzaninotto/faker": "^1.4",
     "mockery/mockery": "^1.0",
     "nunomaduro/collision": "^3.0",
-    "phpunit/phpunit": "^7.5"
+    "phpunit/phpunit": "^8.5"
   },
   "config": {
     "optimize-autoloader": true,
