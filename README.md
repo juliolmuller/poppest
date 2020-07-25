@@ -1,10 +1,10 @@
 
 # Poppest - The Most Popular Repositories in GitHub
 
-- **Develepoled by:** [Julio L. Muller](https://juliolmuller.github.io/)
+- **Developed by:** [Julio L. Muller](https://juliolmuller.github.io/)
 - **Released on:** Jun 16, 2019
-- **Updated on:** Apr 30, 2020
-- **Latest version:** 1.2.1
+- **Updated on:** Jul 25, 2020
+- **Latest version:** 1.2.2
 - **License:** MIT
 
 ## Overview
@@ -15,13 +15,13 @@ This is an application developed as a challenge, proposed by the company [Ateliw
 
 ![Poppest snapshot](./app-overview.jpg)
 
-## How to Set Up the Enviroment
+## How to Set Up the Environment
 
-Poppest is a web application developed with PHP Laravel and MySQL. So, to get it up and running in your local enviroment, you are going to meet a few requirements.
+Poppest is a web application developed with PHP Laravel and MySQL. So, to get it up and running in your local environment, you are going to meet a few requirements.
 
 ### Software Required
 
-Make sure you have the following applications installed and have their enviroment variables properly configured:
+Make sure you have the following applications installed and have their environment variables properly configured:
 
 - [PHP 7.2+](https://php.net/)
 - [Composer](https://getcomposer.org/)
@@ -69,7 +69,7 @@ As part of the challenge, the project should contain scripts for testing (includ
 
 The tests execute 40 assertions related to HTTP requests (routes), database content and data consistency.
 
-NOTE: *these tests are only for the server-side app, written in PHP. Front-end testing, which would include the React aaplication, was not done.*
+NOTE: *these tests are only for the server-side app, written in PHP. Front-end testing, which would include the React application, was not done.*
 
 ## Technologies
 
@@ -101,7 +101,7 @@ Here are the main technologies used to build this project:
 - Console Emulator: [Cmder](https://cmder.net/)
 - PHP Package Manager: [Composer](https://getcomposer.org/)
 - JS Package Manager: [Node.js](https://nodejs.org/en/)
-- API Development Enviroment: [Postman](https://www.getpostman.com/)
+- API Development Environment: [Postman](https://www.getpostman.com/)
 - PHP Testing: [PHPUnit](https://phpunit.de/)
 - Versioning Tool: [Git](https://git-scm.com/)
 - Remote Repository: [GitHub](https://github.com/)
