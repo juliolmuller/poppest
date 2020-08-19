@@ -11,19 +11,19 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
-    "@lacussoft/eslint-config-standard": "^1.0.4",
+    "@lacussoft/eslint-config-standard": "^1.0.6",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
-    "cross-env": "5.*",
-    "heroku": "^7.42.5",
+    "bootstrap": "^4.5.2",
+    "cross-env": "^7.0.2",
+    "heroku": "^7.42.8",
     "jquery": "^3.5.1",
     "laravel-mix": "^5.0.4",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "resolve-url-loader": "2.*",
+    "resolve-url-loader": "^3.1.1",
     "sass": "^1.26.10",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^9.0.3"
   },
   "babel": {
     "plugins": [
