@@ -4,8 +4,8 @@
 
 - **Project developed by:** [Julio L. Muller](https://github.com/juliolmuller)
 - **Released on:** Jun 16, 2019
-- **Updated on:** Aug 19, 2020
-- **Latest version:** 1.2.3
+- **Updated on:** Sep 1, 2020
+- **Latest version:** 1.3.0
 - **License:** MIT
 
 ![Poppest snapshot](./app-overview.jpg)
@@ -24,7 +24,7 @@ This application was proposed by [Ateliware](https://ateliware.com.br/), as part
 ## :hammer: Technologies & Resources
 
 **Frontend:**
-- [React 16](https://reactjs.org)
+- [React 16](https://reactjs.org) (with Hooks & TypeScript)
 - [jQuery 3](https://jquery.com/)
 - [Bootstrap 4](https://getbootstrap.com/)
 - [Axios](https://github.com/axios/axios) (HTTP client)
@@ -63,10 +63,10 @@ $ php artisan serve          # To start the server
 $ "./vendor/bin/phpunit"     # To run automated tests
 ```
 
-When dealing with the front-end, you must use:
+When dealing with the front-end, you must use `yarn` to run the scripts:
 
 ```bash
-$ npm install        # To download JavaScript dependencies
-$ npm run watch      # To keep compiling to 'public/' while developing
-$ npm run production # For minified bundle for production
+$ yarn install    # To download JavaScript dependencies
+$ yarn watch      # To keep compiling to 'public/' while developing
+$ yarn production # For minified bundle for production
 ```
