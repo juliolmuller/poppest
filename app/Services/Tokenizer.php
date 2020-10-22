@@ -15,16 +15,22 @@ class Tokenizer
     private $token;
 
     /**
-     * Instanciate tokenizer
+     * Instantiate tokenizer
+     *
+     * @param int|null $timestamp
+     * @param string|null $token
      */
-    public function __construct(int $simestamp = null, string $token = null)
+    public function __construct(int $timestamp = null, string $token = null)
     {
-        $this->timestamp = $simestamp ?? time();
+        $this->timestamp = $timestamp ?? time();
         $this->token = $token ?? self::generate($this->timestamp);
     }
 
     /**
      * Generate token using MD5
+     *
+     * @param int $timestamp
+     * @return string
      */
     private static function generate(int $timestamp)
     {
@@ -33,6 +39,8 @@ class Tokenizer
 
     /**
      * Validate incoming token integrity
+
+     * @return bool
      */
     public function isValid()
     {
@@ -41,6 +49,8 @@ class Tokenizer
 
     /**
      * Validate incoming token expiration
+
+     * @return bool
      */
     public function isExpired()
     {
@@ -48,7 +58,7 @@ class Tokenizer
     }
 
     /**
-     * Getters forto retrieve attributes
+     * Getters to retrieve attributes
      */
     public function getTimestamp()
     {

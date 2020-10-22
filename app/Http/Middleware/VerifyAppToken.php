@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\Tokenizer;
 use Closure;
 use Illuminate\Http\Request;
-use App\Services\Tokenizer;
 
 class VerifyAppToken
 {

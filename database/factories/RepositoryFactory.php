@@ -1,12 +1,26 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use App\Repository;
-use Faker\Generator as Faker;
+use App\Models\Repository;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Repository::class, function (Faker $faker) {
-    return [
-        //
-    ];
-});
+class RepositoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Repository::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [];
+    }
+}

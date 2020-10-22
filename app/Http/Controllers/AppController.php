@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\Tokenizer;
-use App\Repository;
-use App\Language;
+use App\Models\Repository;
+use App\Models\Language;
 
 class AppController extends Controller
 {
@@ -42,8 +41,7 @@ class AppController extends Controller
      */
     public function getLanguages()
     {
-        $languages = Language::all();
-        return $languages;
+        return Language::all();
     }
 
     /**

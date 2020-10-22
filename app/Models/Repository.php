@@ -1,12 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ixudra\Curl\Facades\Curl;
 
 class Repository extends Model
 {
+    use HasFactory;
+
     /**
      * Fix constant for GitHub API URL.
      */
@@ -71,6 +74,6 @@ class Repository extends Model
      */
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }
