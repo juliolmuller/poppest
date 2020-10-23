@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Header from './components/layout/Header'
 import Main from './components/layout/Main'
 
-const App = () => (
+const App: FC = () => (
   <>
     <Header />
     <Main />

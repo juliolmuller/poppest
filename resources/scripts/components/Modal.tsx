@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import $ from 'jquery'
+import { Repository } from '../@types/models'
 import star from '../assets/icon-star.svg'
 import fork from '../assets/icon-fork.svg'
 import code from '../assets/icon-code.svg'
@@ -10,15 +11,17 @@ interface ModalProps {
   repo: Repository
 }
 
-const Modal: React.FC<ModalProps> = ({ hideDetails, repo }) => {
+const Modal: React.FC<ModalProps> = (props) => {
   useEffect(() => {
-    $('#repo-details').on('hidden.bs.modal', e => {
-      hideDetails()
-    }).click((ev: any) => $(ev.target).modal('hide'))
-    $('#repo-details').modal('show')
+    const modal = $('#repo-details')
+
+    modal.on('hidden.bs.modal', props.hideDetails)
+    modal.on('click', (ev) => $(ev.target).modal('hide'))
+    modal.modal('show')
+
     $('body').css({
       'padding-right': '',
-      'overflow': 'auto'
+      'overflow': 'auto',
     })
   }, [])
 
@@ -32,29 +35,29 @@ const Modal: React.FC<ModalProps> = ({ hideDetails, repo }) => {
                 <span>&times;</span>
               </button>
             </div>
-            <img src={repo.avatar} alt="Repository avatar" className="modal-avatar rounded" style={{ height: '140px' }} />
-            <h2 className="modal-title">{repo.name}</h2>
-            <small className="modal-author">by {repo.owner}</small>
+            <img src={props.repo.avatar} alt="Repository avatar" className="modal-avatar rounded" style={{ height: '140px' }} />
+            <h2 className="modal-title">{props.repo.name}</h2>
+            <small className="modal-author">by {props.repo.owner}</small>
           </div>
           <div className="modal-body">
-            <p>{repo.description}</p>
+            <p>{props.repo.description}</p>
             <div className="d-flex justify-content-around">
               <div className="d-inline border border-success text-success rounded px-2">
                 <img src={star} className="mr-1" alt="Icon for stars count" />
-                {repo.stars}
+                {props.repo.stars}
               </div>
               <div className="d-inline border border-primary text-primary rounded px-2">
                 <img src={fork} className="mr-1" alt="Icon for forks count" />
-                {repo.forks}
+                {props.repo.forks}
               </div>
               <div className="d-inline border border-danger text-danger rounded px-2">
                 <img src={code} className="mr-1" alt="Coding icon" />
-                {repo.language.name}
+                {props.repo.language.name}
               </div>
             </div>
           </div>
           <div className="modal-footer">
-            <a href={repo.url} id="modal-link" className="btn btn-light" target="_blank" rel="noopener noreferrer">
+            <a href={props.repo.url} id="modal-link" className="btn btn-light" target="_blank" rel="noopener noreferrer">
               <img src={eye} alt="View icon" />
               See GitHub repository
             </a>

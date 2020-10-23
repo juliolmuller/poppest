@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import './index.css'
 
-const Header = () => (
+const Header: FC = () => (
   <header className="bg-pop">
     <div className="container">
       <div className="center-content">

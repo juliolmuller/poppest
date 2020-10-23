@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ContentController from '../../ContentController'
 import './index.css'
 
-const Main = () => (
+const Main: FC = () => (
   <main className="container-fluid content-wrapper">
     <div className="container" role="main">
       <ContentController />

@@ -1,52 +1,71 @@
 {
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "development": "yarn run dev",
-    "watch": "yarn run development -- --watch",
-    "watch:poll": "yarn run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "yarn run prod",
-    "publish": "heroku login && git push heroku master"
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
-    "@lacussoft/eslint-config-standard": "^1.0.7",
-    "@types/jquery": "^3.5.1",
-    "@types/node": "^14.6.2",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "axios": "^0.20.0",
-    "bootstrap": "^4.5.2",
-    "eslint": "^7.8.1",
+    "axios": "~0.20.0",
+    "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@lacussoft/eslint-config-standard": "^1.0.9",
+    "@types/jquery": "^3.5.3",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
     "cross-env": "^7.0.2",
-    "heroku": "^7.42.13",
-    "laravel-mix": "^5.0.5",
+    "eslint": "^7.11.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "heroku": "^7.46.2",
+    "laravel-mix": "^5.0.7",
     "laravel-mix-react-typescript-extension": "^1.0.3",
-    "resolve-url-loader": "^3.1.1",
-    "sass": "^1.26.10",
-    "sass-loader": "^10.0.1",
-    "typescript": "^4.0.2"
-  },
-  "babel": {
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+    "resolve-url-loader": "^3.1.2",
+    "sass": "^1.27.0",
+    "sass-loader": "^10.0.4",
+    "typescript": "^4.0.3"
   },
   "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true
+    },
     "extends": [
-      "react-app",
-      "@lacussoft/standard"
+      "@lacussoft/standard",
+      "plugin:@typescript-eslint/recommended"
     ],
-    "rules": {}
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "react",
+      "react-hooks",
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/no-use-before-define": "off",
+      "arrow-body-style": "off",
+      "no-use-before-define": "off"
+    }
   }
 }

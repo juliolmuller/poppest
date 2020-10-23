@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import api from '../services/ApiConsumer'
+import React, { FC, useEffect, useState } from 'react'
+import { Language } from '../@types/models'
+import { getLanguages, refreshDatabase } from '../services/api'
 import loading from '../assets/loading.gif'
 
 interface ControlPanelProps {
@@ -7,30 +8,28 @@ interface ControlPanelProps {
   activeLang: number
 }
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ activeLang, activateTab }) => {
+const ControlPanel: FC<ControlPanelProps> = (props) => {
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [languages, setLanguages] = useState([])
+  const [languages, setLanguages] = useState<Language[]>([])
 
   useEffect(() => {
-    api.getLanguages().then((response: any) => setLanguages(response.data))
+    getLanguages().then((response) => setLanguages(response.data))
   }, [])
 
-  function getRefreshmentStyles() {
-    if (isRefreshing) {
-      return {
-        background: `url(${loading})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        color: 'rgb(0, 0, 0, 0)',
-        overflow: 'hidden'
-      }
-    }
+  const getRefreshmentStyles = () => {
+    return isRefreshing ? {
+      background: `url(${loading})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      color: 'rgb(0, 0, 0, 0)',
+      overflow: 'hidden',
+    } : undefined
   }
 
-  function refreshResources() {
+  const refreshResources = () => {
     setIsRefreshing(true)
-    api.refreshDatabase().finally(() => {
-      activateTab(activeLang)
+    refreshDatabase().finally(() => {
+      props.activateTab(props.activeLang)
       setIsRefreshing(false)
     })
   }
@@ -62,9 +61,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ activeLang, activateTab }) 
             key={lang.id}
             type="button"
             id={`activate-lang-${lang.id}`}
-            className={`btn btn-outline-pop nav-item ${activeLang === lang.id ? 'active' : ''}`}
+            className={`btn btn-outline-pop nav-item ${props.activeLang === lang.id ? 'active' : ''}`}
             disabled={isRefreshing}
-            onClick={() => activateTab(lang.id)}
+            onClick={() => props.activateTab(lang.id)}
           >{lang.name}</button>
         ))}
       </nav>
