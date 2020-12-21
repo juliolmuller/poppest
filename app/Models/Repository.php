@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class Repository extends Model
 {
@@ -20,15 +21,14 @@ class Repository extends Model
      */
     private static function getFromAPI(string $language)
     {
-        // Use 'ixudra/curl' to consume API
-        return Curl::to(self::GITHUB_API)
-            ->withHeader('User-Agent: juliolmuller')
-            ->withContentType('application/json')
-            ->withData([
-                'q' => 'language:' . mb_strtolower($language),
-                'sort' => 'stars',
-                'order' => 'desc'
-            ])->get();
+        $request = Http::withHeaders(['User-Agent' => 'juliolmuller']);
+        $response = $request->get(self::GITHUB_API, [
+            'q' => 'language:' . Str::lower($language),
+            'sort' => 'stars',
+            'order' => 'desc',
+        ]);
+
+        return json_decode($response->body());
     }
 
     /**
@@ -36,22 +36,18 @@ class Repository extends Model
      */
     public static function reset($languages)
     {
-        // Convert single parameter to array
-        if (!is_iterable($languages)) $languages = [$languages];
+        if (!is_iterable($languages)) {
+            $languages = [$languages];
+        }
 
-        // Create array to receive all objects to be added to the database
         $repositories = [];
 
-        // Iterate on every language passed as parameter
         foreach ($languages as $language) {
-
-            // Erase previous data from
             self::where('language_id', $language->id)->delete();
+            $response = self::getFromAPI($language->name);
 
-            // Submit request to external API
-            $response = json_decode(self::getFromAPI($language->name));
             foreach ($response->items as $item) {
-                array_push($repositories, [
+                $repositories[] = [
                     'full_name' => $item->full_name,
                     'name' => $item->name,
                     'owner' => $item->owner->login,
@@ -61,11 +57,10 @@ class Repository extends Model
                     'forks' => $item->forks_count,
                     'language_id' => $language->id,
                     'description' => $item->description
-                ]);
+                ];
             }
         }
 
-        // Insert data into database
         self::insert($repositories);
     }
 
