@@ -3,19 +3,22 @@ import { Language, Repository } from '../@types/models'
 
 const metaTimestamp = document.head.querySelector<HTMLMetaElement>('meta[name="timestamp"]')
 const metaToken = document.head.querySelector<HTMLMetaElement>('meta[name="app-token"]')
-
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-axios.defaults.headers.common['X-TIMESTAMP'] = metaTimestamp?.content
-axios.defaults.headers.common['X-TOKEN'] = metaToken?.content
+const http = axios.create({
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-TIMESTAMP': metaTimestamp?.content,
+    'X-TOKEN': metaToken?.content,
+  },
+})
 
 export const refreshDatabase = (): Promise<AxiosResponse> => {
-  return axios.post('/api/load')
+  return http.post('/api/load')
 }
 
 export const getLanguages = (): Promise<AxiosResponse<Language[]>> => {
-  return axios.get('/api/languages')
+  return http.get('/api/languages')
 }
 
 export const getRepositories = (languageId: number): Promise<AxiosResponse<Repository[]>> => {
-  return axios.get(`/api/repositories/${languageId}`)
+  return http.get(`/api/repositories/${languageId}`)
 }
