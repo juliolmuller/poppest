@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import './index.css'
+import './styles.css'
 
 const Header: FC = () => (
   <header className="bg-pop">

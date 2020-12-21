@@ -3,12 +3,12 @@ import { Repository } from '../@types/models'
 import star from './../assets/icon-star.svg'
 import fork from './../assets/icon-fork.svg'
 
-interface RepoProps {
+interface RepoCardProps {
   showDetails: (repo: Repository) => void
   repo: Repository
 }
 
-const Repo: FC<RepoProps> = (props) => (
+const RepoCard: FC<RepoCardProps> = (props) => (
   <div className="col-12 col-sm-6 col-lg-4">
     <div className="card border border-pop mb-3" onClick={() => props.showDetails(props.repo)}>
       <div className="card-body">
@@ -34,4 +34,4 @@ const Repo: FC<RepoProps> = (props) => (
   </div>
 )
 
-export default Repo
+export default RepoCard

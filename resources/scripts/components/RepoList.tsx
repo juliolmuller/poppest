@@ -1,15 +1,15 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Repository } from '../@types/models'
-import Repo from './Repo'
-import Modal from './Modal'
+import RepoCard from './RepoCard'
+import RepoModal from './RepoModal'
 import { getRepositories } from '../services/api'
 import loading from '../assets/loading.gif'
 
-interface DisplayPanelProps {
+interface RepoListProps {
   activeLang: number
 }
 
-const DisplayPanel: FC<DisplayPanelProps> = (props) => {
+const RepoList: FC<RepoListProps> = (props) => {
   const [repositories, setRepositories] = useState<Repository[]>([])
   const [detailsFor, setDetails] = useState<Repository | Record<string, unknown>>({})
   const [visibleDetails, setVisibleDetails] = useState(false)
@@ -31,21 +31,32 @@ const DisplayPanel: FC<DisplayPanelProps> = (props) => {
     <>
       {isLoading ? (
         <div className="text-center">
-          <img src={loading} style={{ width: '100%', maxWidth: '600px' }} alt="Loading animation" />
+          <img
+            src={loading}
+            alt="Loading animation"
+            style={{ width: '100%', maxWidth: '600px' }}
+          />
         </div>
       ) : (
         <div className="row">
           {repositories.map((repo, index) => (
-            <Repo key={index} repo={repo} showDetails={toggleDetails} />
+            <RepoCard
+              key={index}
+              repo={repo}
+              showDetails={toggleDetails}
+            />
           ))}
         </div>
       )}
 
       {visibleDetails && (
-        <Modal repo={detailsFor as Repository} hideDetails={toggleDetails} />
+        <RepoModal
+          repo={detailsFor as Repository}
+          hideDetails={toggleDetails}
+        />
       )}
     </>
   )
 }
 
-export default DisplayPanel
+export default RepoList

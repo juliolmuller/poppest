@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import $ from 'jquery'
 import { Repository } from '../@types/models'
 import star from '../assets/icon-star.svg'
@@ -6,24 +6,27 @@ import fork from '../assets/icon-fork.svg'
 import code from '../assets/icon-code.svg'
 import eye from '../assets/icon-eye.svg'
 
-interface ModalProps {
+const REPO_SELECTOR = '#repo-details'
+
+interface RepoModalProps {
   hideDetails: () => void
   repo: Repository
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
+const RepoModal: FC<RepoModalProps> = ({ repo, hideDetails }) => {
   useEffect(() => {
-    const modal = $('#repo-details')
-
-    modal.on('hidden.bs.modal', props.hideDetails)
-    modal.on('click', (ev) => $(ev.target).modal('hide'))
-    modal.modal('show')
-
-    $('body').css({
-      'padding-right': '',
-      'overflow': 'auto',
+    $(REPO_SELECTOR).modal('show')
+    $(document.body).css({
+      overflow: 'auto',
+      paddingRight: 0,
     })
   }, [])
+
+  useEffect(() => {
+    $(REPO_SELECTOR).on('hidden.bs.modal', () => {
+      hideDetails()
+    })
+  }, [hideDetails])
 
   return (
     <div id="repo-details" className="modal fade" tabIndex={-1} role="dialog" data-backdrop="false">
@@ -35,29 +38,29 @@ const Modal: React.FC<ModalProps> = (props) => {
                 <span>&times;</span>
               </button>
             </div>
-            <img src={props.repo.avatar} alt="Repository avatar" className="modal-avatar rounded" style={{ height: '140px' }} />
-            <h2 className="modal-title">{props.repo.name}</h2>
-            <small className="modal-author">by {props.repo.owner}</small>
+            <img src={repo.avatar} alt="Repository avatar" className="modal-avatar rounded" style={{ height: '140px' }} />
+            <h2 className="modal-title">{repo.name}</h2>
+            <small className="modal-author">by {repo.owner}</small>
           </div>
           <div className="modal-body">
-            <p>{props.repo.description}</p>
+            <p>{repo.description}</p>
             <div className="d-flex justify-content-around">
               <div className="d-inline border border-success text-success rounded px-2">
                 <img src={star} className="mr-1" alt="Icon for stars count" />
-                {props.repo.stars}
+                {repo.stars}
               </div>
               <div className="d-inline border border-primary text-primary rounded px-2">
                 <img src={fork} className="mr-1" alt="Icon for forks count" />
-                {props.repo.forks}
+                {repo.forks}
               </div>
               <div className="d-inline border border-danger text-danger rounded px-2">
                 <img src={code} className="mr-1" alt="Coding icon" />
-                {props.repo.language.name}
+                {repo.language.name}
               </div>
             </div>
           </div>
           <div className="modal-footer">
-            <a href={props.repo.url} id="modal-link" className="btn btn-light" target="_blank" rel="noopener noreferrer">
+            <a href={repo.url} id="modal-link" className="btn btn-light" target="_blank" rel="noopener noreferrer">
               <img src={eye} alt="View icon" />
               See GitHub repository
             </a>
@@ -71,4 +74,4 @@ const Modal: React.FC<ModalProps> = (props) => {
   )
 }
 
-export default Modal
+export default RepoModal
