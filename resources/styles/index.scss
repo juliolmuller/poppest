@@ -2,7 +2,7 @@
 /**
  * Import external fonts
  */
- @import url('https://fonts.googleapis.com/css?family=Nunito');
+ @import url('https://fonts.googleapis.com/css?family=Nunito,Roboto');
  @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
 /**
@@ -21,7 +21,7 @@
 * Additional custom styles
 */
 * {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 .progress {
@@ -42,4 +42,15 @@
 */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-item ~ .nav-item {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.nav-item:not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right: 0;
 }
