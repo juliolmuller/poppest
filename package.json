@@ -32,7 +32,6 @@
     "eslint": "^7.16.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "heroku": "^7.47.6",
     "laravel-mix": "^5.0.9",
     "laravel-mix-react-typescript-extension": "^1.0.3",
     "resolve-url-loader": "^3.1.2",
