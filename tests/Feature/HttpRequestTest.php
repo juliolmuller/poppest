@@ -6,8 +6,6 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Ixudra\Curl\Facades\Curl;
 use App\Services\Tokenizer;
-use App\Language;
-use App\Repository;
 
 class HttpRequestTest extends TestCase
 {
@@ -31,7 +29,7 @@ class HttpRequestTest extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Poppest');
-        $response->assertSee('<div id="root"></div>'); // Key tag to initialize React application
+        $response->assertSee('<div id="root"></div>', false); // Key tag to initialize React application
     }
 
     /**

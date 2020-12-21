@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Language;
-use App\Repository;
+use App\Models\Language;
+use App\Models\Repository;
 
 class ModelTest extends TestCase
 {
