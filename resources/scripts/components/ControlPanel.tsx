@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Language } from '../@types/models'
 import { getLanguages, refreshDatabase } from '../services/api'
 import loading from '../assets/loading.gif'
@@ -8,7 +8,7 @@ interface ControlPanelProps {
   activeLang: number
 }
 
-const ControlPanel: FC<ControlPanelProps> = (props) => {
+function ControlPanel(props: ControlPanelProps) {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [languages, setLanguages] = useState<Language[]>([])
 

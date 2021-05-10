@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react'
+import { useState } from 'react'
 import ControlPanel from '../../ControlPanel'
 import RepoList from '../../RepoList'
-import './styles.css'
+import './styles.scss'
 
-const Main: FC = () => {
+function Main() {
   const [activeTab, setActiveTab] = useState(0)
 
   return (

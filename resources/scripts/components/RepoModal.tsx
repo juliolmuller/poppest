@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import { useEffect } from 'react'
 import $ from 'jquery'
 import { Repository } from '../@types/models'
 import star from '../assets/icon-star.svg'
@@ -13,7 +13,7 @@ interface RepoModalProps {
   repo: Repository
 }
 
-const RepoModal: FC<RepoModalProps> = ({ repo, hideDetails }) => {
+function RepoModal({ repo, hideDetails }: RepoModalProps) {
   useEffect(() => {
     $(REPO_SELECTOR).modal('show')
     $(document.body).css({
@@ -29,16 +29,22 @@ const RepoModal: FC<RepoModalProps> = ({ repo, hideDetails }) => {
   }, [hideDetails])
 
   return (
-    <div id="repo-details" className="modal fade" tabIndex={-1} role="dialog" data-backdrop="false">
+    <div id="repo-details" className="modal fade" tabIndex={-1}
+      role="dialog" data-backdrop="false"
+    >
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header text-center d-block">
             <div className="text-right">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" className="close" data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span>&times;</span>
               </button>
             </div>
-            <img src={repo.avatar} alt="Repository avatar" className="modal-avatar rounded" style={{ height: '140px' }} />
+            <img src={repo.avatar} alt="Repository avatar" className="modal-avatar rounded"
+              style={{ height: '140px' }}
+            />
             <h2 className="modal-title">{repo.name}</h2>
             <small className="modal-author">by {repo.owner}</small>
           </div>
@@ -60,7 +66,9 @@ const RepoModal: FC<RepoModalProps> = ({ repo, hideDetails }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <a href={repo.url} id="modal-link" className="btn btn-light" target="_blank" rel="noopener noreferrer">
+            <a href={repo.url} id="modal-link" className="btn btn-light"
+              target="_blank" rel="noopener noreferrer"
+            >
               <img src={eye} alt="View icon" />
               See GitHub repository
             </a>

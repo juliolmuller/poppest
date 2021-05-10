@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Repository } from '../@types/models'
 import RepoCard from './RepoCard'
 import RepoModal from './RepoModal'
@@ -9,7 +9,7 @@ interface RepoListProps {
   activeLang: number
 }
 
-const RepoList: FC<RepoListProps> = (props) => {
+function RepoList(props: RepoListProps) {
   const [repositories, setRepositories] = useState<Repository[]>([])
   const [detailsFor, setDetails] = useState<Repository | Record<string, unknown>>({})
   const [visibleDetails, setVisibleDetails] = useState(false)
